@@ -1,0 +1,19 @@
+version: '2'
+services:
+  nginx:
+    build:
+      context: ./nginx
+    image: react_nginx
+    container_name: react_nginx_c
+    ports:
+      - "80:8080"
+    volumes:
+      - ./app/dist:/wwwroot:ro
+  webpack:
+    build:
+      context: ./webpack
+    image: react_todo
+    container_name: react_todo_c
+    volumes:
+      - ./app/src:/app/src:ro
+      - ./app/dist:/app/dist:z
